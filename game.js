@@ -80,10 +80,10 @@ class MainMenuState extends Phaser.State{
         this.screen_width = screen_width;
         this.screen_height = screen_height;
 
-        this.Color_Gray = 0x0E4749;
-        this.Color_Light_Gray = 0xC1BDB3;
+        this.Color_Gray = 0x313543;
+        this.Color_Light_Gray = 0xc0c0c0;
         this.Color_Black = 0x312F2F;
-        this.Color_Dark_Purple = 0xC6D8FF;
+        this.Color_Dark_Purple = 0xceb164;
         this.Color_Lightest_Blue = 0xC6D8FF;
 
     }
@@ -276,16 +276,16 @@ class Main extends Phaser.State{
 
         this.Debug = false;
         
-        this.Color_Blue = 0x00bfb3;
-        this.Color_Green = 0x0dab76;
-        this.Color_Brown = 0x764134;
-        this.Color_Yellow = 0xfffc31;
-        this.Color_Black = 0x312f2f;
-        this.Color_Tan = 0xdbb68f;
-        this.Color_Purple = 0x525174;
-        this.Color_Power_Drop = 0xA4036F;
-        this.Color_Power_Drop_Special = 0xBF1A2F;
-        this.Color_Pink = 0xE9AFA3;
+        this.Color_Blue = 0xd4d4d4;
+        this.Color_Green = 0xc0c0c0;
+        this.Color_Brown = 0xa4aaaa;
+        this.Color_Yellow = 0x757d90;
+        this.Color_Black = 0x272428;
+        this.Color_Tan = 0x313543;
+        this.Color_Purple = 0x341d27;
+        this.Color_Power_Drop = 0xa54d34;
+        this.Color_Power_Drop_Special = 0xd12613;
+        this.Color_Pink = 0xd78632;
 
         // Controllers
         this.Game_Controller;
@@ -375,7 +375,7 @@ class Main extends Phaser.State{
         this.game_score = this.game.add.text(this.game.world.centerX, this.Screen_Height * 0.1, this.Game_Variables[0].toString(), this.score_text_style);
         this.game_score.anchor.set(0.5);
 
-        this.level_text_style = { font: "75px Arial", fill: "#dbb68f", align: "center" };
+        this.level_text_style = { font: "75px Arial", fill: "#341d27", align: "center" };
         this.level_text = this.game.add.text(this.game.world.centerX, this.game.world.centerY - (this.Screen_Height * 0.25), "Level " + this.starting_level.toString(), this.level_text_style);
         this.level_text.anchor.set(0.5);
         this.level_text.alpha = 0;
@@ -547,28 +547,29 @@ class GameObject {
         this.paused = false;
 
         // Colors
-        this.Color_Blue = 0x00bfb3;
-        this.Color_Green = 0x0dab76;
-        this.Color_Brown = 0x764134;
-        this.Color_Yellow = 0xfffc31;
-        this.Color_Black = 0x312f2f;
-        this.Color_Tan = 0xdbb68f;
-        this.Color_Purple = 0x525174;
-        this.Color_Power_Drop = 0xA4036F;
-        this.Color_Power_Drop_Special = 0xBF1A2F;
+        this.Color_Blue = 0xd4d4d4;
+        this.Color_Green = 0xc0c0c0;
+        this.Color_Brown = 0xa4aaaa;
+        this.Color_Yellow = 0x757d90;
+        this.Color_Black = 0x272428;
+        this.Color_Tan = 0x313543;
+        this.Color_Purple = 0x341d27;
+        this.Color_Power_Drop = 0xa54d34;
+        this.Color_Power_Drop_Special = 0xd12613;
+        this.Color_Pink = 0xd78632;        
         this.Color_Light_Blue = 0x99B2DD;
         this.Color_Dark_Purple = 0x443742;
 
-        this.Color_Blue_RGB = [0,191,179]
-        this.Color_Green_RGB = [13,171,118];
-        this.Color_Brown_RGB = [118,65,52];
-        this.Color_Yellow_RGB = [255,252,49];
-        this.Color_Black_RGB = [49,47,47];
-        this.Color_Tan_RGB = [219,182,143];
-        this.Color_Purple_RGB = [82,81,116];
-        this.Color_Power_Drop_RGB = [164,3,111];
-        this.Color_Power_Drop_Special_RGB = [191,26,47];
-        this.Color_Light_Blue_RGB = [153,178,221];
+        this.Color_Blue_RGB = [212,212,212]
+        this.Color_Green_RGB = [192,192,192];
+        this.Color_Brown_RGB = [164,170,170];
+        this.Color_Yellow_RGB = [117,125,144];
+        this.Color_Black_RGB = [39,36,40];
+        this.Color_Tan_RGB = [49,53,67];
+        this.Color_Purple_RGB = [52,29,39];
+        this.Color_Power_Drop_RGB = [165,77,52];
+        this.Color_Power_Drop_Special_RGB = [209,38,19];
+        this.Color_Light_Blue_RGB = [68,65,66];
 
     }
 
@@ -2091,33 +2092,6 @@ class GameController extends GameObject{
         this.restart_button = this.game.add.text(this.game.world.centerX, this.goal_controller.get_screen_height() * 0.585, "Restart Game", this.restart_text);
         this.restart_button.anchor.set(0.5);
 
-        // Add score
-        this.add_score = this.game.add.graphics(0, this.goal_controller.get_screen_height() * 0.21);
-        this.add_score.beginFill(this.Color_Dark_Purple, 1);
-        this.add_score.lineStyle(1, this.Color_Dark_Purple);
-        this.add_score.drawRect(0, 0, this.goal_controller.get_screen_width(), this.goal_controller.get_screen_height() * 0.05);
-        this.add_score.endFill();
-
-        this.btn_add_score = this.game.add.sprite(0 , this.goal_controller.get_screen_height() * 0.45, '');
-        this.btn_add_score.addChild(this.add_score);
-        this.btn_add_score.inputEnabled = true;
-        var score = this.game_variables[0];
-        this.btn_add_score.events.onInputUp.add(function(){
-            
-            // Goto new html page
-            var player = window.prompt("Enter you name:","Guest");
-            var score_form = document.forms['score_form'];
-            score_form.elements["player"].value = player;
-            score_form.elements["score"].value = score;
-            score_form.submit();
-
-        });
-
-        this.add_score_button_text = {font: "40px Arial", fill: "#C1BDB3", align: "center"};
-        this.add_score_button = this.game.add.text(this.game.world.centerX, this.goal_controller.get_screen_height() * 0.685, "Add My Score to the Leaderboard", this.add_score_button_text);
-        this.add_score_button.anchor.set(0.5);
-
-
     }    
 }
 
@@ -2440,7 +2414,7 @@ class LevelController extends GameObject{
     fade_level_in(){
 
         // Fade level text in
-        this.level_label.setText("Level " + this.level.toString());
+        this.level_label.setText("Level " + this.level.toString());//ceb164
         if(this.level == 20) this.level_label.setText("Point of No Return");
         this.constant_level.setText(this.level.toString());
         this.game.add.tween(this.level_label).to( { alpha: 1 }, 1000, "Linear", true);
@@ -2545,7 +2519,4 @@ class LevelController extends GameObject{
 
 // Start game
 var color_drop = new ColorDrop(1000, 1500);
-
-// Game ID
-// b7b778db163743bbbe7107b119c95f83
 
